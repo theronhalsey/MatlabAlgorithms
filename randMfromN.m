@@ -1,5 +1,5 @@
 function rand_selections = randMfromN(options,N_options,M_toChoose)
-% uses Knuth's Algorithm S to select M itemsvfrom a list of N options with
+% uses Knuth's Algorithm S to select M items from a list of N options with
 % equal probability
 n_chosen = 0;
 r_toChoose = M_toChoose;
