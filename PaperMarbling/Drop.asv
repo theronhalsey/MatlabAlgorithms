@@ -1,0 +1,26 @@
+classdef Drop
+    % Drop of ink for paper marbling simulation
+
+    properties
+        x {mustBeNumeric}
+        y {mustBeNumeric}
+        r {mustBeNonnegative}
+    end
+
+    methods
+        function obj = Drop(x_in,y_in,r_in)
+            %Drop Constructor
+            %   assign the x and y values of the location and radius r of a
+            %   drop
+            obj.x = x_in;
+            obj.y = y_in;
+            obj.r = r_in;
+        end
+
+        function outputArg = method1(obj,inputArg)
+            %METHOD1 Summary of this method goes here
+            %   Detailed explanation goes here
+            outputArg = obj.Property1 + inputArg;
+        end
+    end
+end
