@@ -19,7 +19,7 @@ classdef Drop < handle
             obj.r = r_in;
             obj.c = c_in;
             
-            n_vertices = 25*r_in;
+            n_vertices = r_in;
             theta = tau/n_vertices; 
             angles = (0:n_vertices-1)*theta;
             
@@ -28,8 +28,8 @@ classdef Drop < handle
 
         function drop = place(obj)
             %place a drop of ink into the plot
-            drop = fill(obj.vertices(1,:),obj.vertices(2,:),obj.c,EdgeColor='white',LineWidth=1);
-            drawnow
+            drop = fill(obj.vertices(1,:),obj.vertices(2,:),obj.c,LineStyle='none');
+            
         end
 
         function marble(obj,otherDrop)
