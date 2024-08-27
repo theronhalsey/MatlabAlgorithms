@@ -24,14 +24,14 @@ classdef Drop
             obj.n_vertices = 100*r_in;
             obj.theta = tau/obj.n_vertices; 
             obj.angles = (0:obj.n_vertices-1)*obj.theta;
-            obj.vertices = [arrayfun(@(t) cos(t), obj.angles) + obj.x; arrayfun(@(t) sin(t), obj.angles) + obj.y]*obj.r;
+            obj.vertices = [arrayfun(@(t) cos(t), obj.angles); arrayfun(@(t) sin(t), obj.angles)]*obj.r + [obj.x;obj.y];
         end
 
-        function drip = place(obj)
+        function place(obj)
             %place a drop of ink into the plot
-            drip = animatedline('Color','r','Marker','.',MarkerSize=1);
-            addpoints(drip,obj.vertices(1,:),obj.vertices(2,:));
-            fill(obj.vertices(1,:),obj.vertices(2,:),'r')
+            %drip = animatedline('Color','r','Marker','.',MarkerSize=1);
+            %addpoints(drip,obj.vertices(1,:),obj.vertices(2,:));
+            fill(obj.vertices(1,:),obj.vertices(2,:),'r',LineStyle='none')
             drawnow
         end
     end
