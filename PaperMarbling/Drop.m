@@ -5,6 +5,11 @@ classdef Drop
         x {mustBeNumeric}
         y {mustBeNumeric}
         r {mustBeNonnegative}
+        d
+        n_vertices
+        theta
+        angles
+        vertices
     end
 
     methods
@@ -16,11 +21,18 @@ classdef Drop
             obj.y = y_in;
             obj.r = r_in;
             obj.d = 2*r_in;
+            obj.n_vertices = 100*r_in;
+            obj.theta = tau/obj.n_vertices; 
+            obj.angles = (0:obj.n_vertices-1)*obj.theta;
+            obj.vertices = [arrayfun(@(t) cos(t), obj.angles) + obj.x; arrayfun(@(t) sin(t), obj.angles) + obj.y]*obj.r;
         end
 
-        function drip = place(obj,inputArg)
+        function drip = place(obj)
             %place a drop of ink into the plot
-            drip = obj.Property1 + inputArg;
+            drip = animatedline('Color','r','Marker','.',MarkerSize=1);
+            addpoints(drip,obj.vertices(1,:),obj.vertices(2,:));
+            fill(obj.vertices(1,:),obj.vertices(2,:),'r')
+            drawnow
         end
     end
 end
