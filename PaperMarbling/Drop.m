@@ -1,4 +1,4 @@
-classdef Drop
+classdef Drop < handle
     % Drop of ink for paper marbling simulation
 
     properties
@@ -27,10 +27,9 @@ classdef Drop
             obj.vertices = [arrayfun(@(t) cos(t), obj.angles); arrayfun(@(t) sin(t), obj.angles)]*obj.r + [obj.x;obj.y];
         end
 
-        function place(obj)
+        function vertices = place(obj)
             %place a drop of ink into the plot
-            %drip = animatedline('Color','r','Marker','.',MarkerSize=1);
-            %addpoints(drip,obj.vertices(1,:),obj.vertices(2,:));
+            vertices = obj.vertices;
             fill(obj.vertices(1,:),obj.vertices(2,:),'r',LineStyle='none')
             drawnow
         end
