@@ -19,16 +19,16 @@ classdef Drop < handle
             obj.r = r_in;
             obj.c = c_in;
             
-            n_vertices = 100*r_in;
+            n_vertices = 25*r_in;
             theta = tau/n_vertices; 
             angles = (0:n_vertices-1)*theta;
             
             obj.vertices = [arrayfun(@(t) cos(t), angles); arrayfun(@(t) sin(t), angles)]*obj.r + [obj.x;obj.y];
         end
 
-        function place(obj)
+        function drop = place(obj)
             %place a drop of ink into the plot
-            fill(obj.vertices(1,:),obj.vertices(2,:),obj.c,EdgeColor='white')
+            drop = fill(obj.vertices(1,:),obj.vertices(2,:),obj.c,EdgeColor='white',LineWidth=1);
             drawnow
         end
 
