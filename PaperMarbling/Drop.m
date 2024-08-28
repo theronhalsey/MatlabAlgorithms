@@ -2,11 +2,11 @@ classdef Drop < handle
     % Drop of ink for paper marbling simulation
 
     properties
-        x {mustBeNumeric}
-        y {mustBeNumeric}
-        r {mustBeNonnegative}
-        c
-        vertices
+        x {mustBeReal} % x coordinate of center of drop
+        y {mustBeReal} % y coordinate of center of drop
+        r {mustBeNonnegative}  % radius of the drop
+        c {mustBeReal} % color of the drop
+        vertices % points on the circumferance of the drop
     end
 
     methods
@@ -19,7 +19,7 @@ classdef Drop < handle
             obj.r = r_in;
             obj.c = c_in;
             
-            n_vertices = r_in;
+            n_vertices = 3*r_in;
             theta = tau/n_vertices; 
             angles = (0:n_vertices-1)*theta;
             
@@ -29,7 +29,6 @@ classdef Drop < handle
         function drop = place(obj)
             %place a drop of ink into the plot
             drop = fill(obj.vertices(1,:),obj.vertices(2,:),obj.c,LineStyle='none');
-            
         end
 
         function marble(obj,otherDrop)
