@@ -48,6 +48,18 @@ for i=2:n_drops
     else
         c_x = drop_xmax*rand();
         c_y = drop_ymax*rand();
+        % inAnotherDrop = 1;
+        % while inAnotherDrop
+        %     c_x = drop_xmax*rand();
+        %     c_y = drop_ymax*rand();
+        %     for j=1:length(Drops)
+        %         inAnotherDrop = inpolygon(c_x,c_y,Drops(j).vertices(1,:),Drops(j).vertices(2,:));
+        %         if inAnotherDrop
+        %             break
+        %         end
+        %     end
+        % end
+
         r = r_max + (r_min-r_max).*rand();
     end
 
@@ -55,14 +67,18 @@ for i=2:n_drops
     Areas(i) = fill(Drops(i).vertices(1,:),Drops(i).vertices(2,:),Drops(i).c,EdgeColor=Drops(i).c,FaceAlpha=0.25,LineStyle="none",Marker=".", MarkerEdgeColor=Drops(i).c);
 
     % marble old drops from influence of new
-    l = length(Drops);
-    for j=1:l
+    for j=1:length(Drops)
+        before = polyarea(Drops(j).vertices(1,:),Drops(j).vertices(2,:));
         Drops(j).marble(Drops(i));
         Areas(j).Vertices(:,1) = Drops(j).vertices(1,:)';
         Areas(j).Vertices(:,2) = Drops(j).vertices(2,:)';
+        after = polyarea(Drops(j).vertices(1,:),Drops(j).vertices(2,:));
+        abs(before-after)
     end
     if show
         drawnow
+        pause(.2)
     end
 end
 
+%in = inpolygon(otherDrop.x,otherDrop.y,obj.vertices(1,:),obj.vertices(2,:));

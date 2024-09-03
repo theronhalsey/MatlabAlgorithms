@@ -19,7 +19,7 @@ classdef Drop < handle
             obj.r = r_in;
             obj.c = c_in;
             
-            n_vertices = 100*r_in;
+            n_vertices = 500*r_in;
             theta = tau/n_vertices; 
             angles = (0:n_vertices-1)*theta;
             
@@ -28,10 +28,12 @@ classdef Drop < handle
 
         function marble(obj,otherDrop)
             %marbles existing drop when another drop is added
-            otherCenter = [otherDrop.x; otherDrop.y];
-            dist = obj.vertices-otherCenter;
-            mags = arrayfun(@(x,y) norm([x y]), dist(1,:), dist(2,:));
-            obj.vertices = otherCenter + (dist .* sqrt(1 + ((otherDrop.r^2) * (mags.^-2))));
+            C = [otherDrop.x; otherDrop.y];
+            PminusC = obj.vertices-C;
+            magnitudes = arrayfun(@(x,y) norm([x y]), PminusC(1,:), PminusC(2,:));
+            i_moved = magnitudes>otherDrop.r;
+            i_contained = magnitudes<=otherDrop.r;
+            obj.vertices = C + PminusC .* sqrt(1 + otherDrop.r^2 * magnitudes.^-2);
         end
     end
 end

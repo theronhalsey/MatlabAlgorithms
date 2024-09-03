@@ -1,6 +1,6 @@
 tic
 manual = 0;
-show = 1;
+show = 0;
 n_drops = 100;
 
 
