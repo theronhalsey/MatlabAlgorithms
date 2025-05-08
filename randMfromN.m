@@ -13,7 +13,7 @@ for i=1:N_options
         r_toChoose = r_toChoose - 1;
         rand_selections(n_chosen) = options(i);
     end
-    if ~r_toChoose
+    if n_chosen == M_toChoose
         break;
     end
 end
